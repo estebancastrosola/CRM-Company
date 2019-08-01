@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>list-department</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+hola
+
+<ion-card
+    tappable
+    *ngFor="let departament of departments"
+  >
+  <div class="card-content">
+      <div class="card-title">{{ departament.description }}</div>
+  </div>
+</ion-card>
+
+<ion-button  (click)="addDepartment()">add department</ion-button>
+
+</ion-content>
