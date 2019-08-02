@@ -24,12 +24,7 @@ export class ListDepartmentPage implements OnInit {
   ngOnInit() {
     this.departments$ = this.department_manager.getDepartments$();
     this.departments$.subscribe(departments => this.departments = departments);
-
-    this.department_manager.addDepartment(new Department({
-      id:"1",
-      description: "Departamento 1",
-      phone:"697878787"
-    }));
+    this.department_manager.loadDepartments();
   }
 
   addDepartment(){

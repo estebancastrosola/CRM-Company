@@ -1,51 +1,52 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 
+
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 
-import { Department } from '../../models/index.models';
+import { Employee } from '../../models/index.models';
 
 @Injectable()
-export class DepartmentManagerProvider {
+export class EmployeeManagerProvider {
 
-    public departments: Department[];
-    private departments$ = new Subject<Department[]>();
+    public employees: Employee[];
+    private employees$ = new Subject<Employee[]>();
 
     constructor(
         private loading_controller: LoadingController
     ) {
-        this.departments = [];
+        this.employees = [];
     }
 
-    async loadDepartments(){
+    async loadEmployees(){
         const loading = await this.loading_controller.create({
             message: 'Loading',
         });
         await loading.present();
 
-        let response = await fetch('http://localhost:3000/departments');
+        let response = await fetch('http://localhost:3000/employees');
         let json = await response.json()
         json.map(data =>{
-            this.departments.push(data);
-            this.departments$.next(this.departments);
+            this.employees.push(data);
+            this.employees$.next(this.employees);
         })
         
         await loading.dismiss();
     }
 
-    getDepartments$(): Observable<Department[]> {
-        return this.departments$.asObservable();
+    getEmployees$(): Observable<Employee[]> {
+        return this.employees$.asObservable();
     }
 
-    public async addDepartment(department: Department) {
+    public async addEmployee(employee: Employee) {
         const loading = await this.loading_controller.create({
             message: 'Loading',
         });
         await loading.present();
 
-        this.departments.push(department);
-        this.departments$.next(this.departments);
+        this.employees.push(employee);
+        this.employees$.next(this.employees);
 
         await loading.dismiss();
     }

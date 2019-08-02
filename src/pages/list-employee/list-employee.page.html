@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>list-employee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card
+        tappable
+        *ngFor="let employee of employees"
+      >
+      <div class="card-content">
+          <div class="card-title">{{ employee.name }}</div>
+      </div>
+    </ion-card>
+    
+    <ion-button  (click)="addEmployee()">add employee</ion-button>
+
+</ion-content>

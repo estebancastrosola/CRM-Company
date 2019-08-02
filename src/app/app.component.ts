@@ -4,8 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-//Providers
-import { DepartmentManagerProvider } from '../providers/managers/department-manager';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +14,7 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    public department_manager: DepartmentManagerProvider,
+    private statusBar: StatusBar
   ) {
     this.initializeApp();
   }

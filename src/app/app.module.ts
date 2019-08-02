@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 //Providers
 import { DepartmentManagerProvider } from '../providers/managers/department-manager';
+import { EmployeeManagerProvider } from '../providers/managers/employee-manager';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { DepartmentManagerProvider } from '../providers/managers/department-mana
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     DepartmentManagerProvider,
+    EmployeeManagerProvider,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
