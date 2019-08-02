@@ -9,6 +9,12 @@ CRM for Companys
 ### 2. Clone this repo
 `git clone https://github.com/estebancastrosola/CRM-Company.git`
 
-### 3. Run the app
+### 3. Install modules
 `cd myApp`  
+`npm install`
+
+### 4. Run mock api
+`json-server --watch db.json`
+
+### 5. Run the app
 `ionic serve`
