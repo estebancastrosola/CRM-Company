@@ -16,11 +16,12 @@
   </div>
   <!-- Data to display after skeleton screen -->
   <div *ngIf="departments">
-    <ion-card tappable *ngFor="let departament of departments">
-      <div class="card-content">
+    <ion-card tappable *ngFor="let departament of departments; let i = index">
+      <div class="card-content" (click)="loadEmployeesByDepartment(i)">
         <div class="card-title">{{ departament.description }}</div>
       </div>
     </ion-card>
   </div>
   <ion-button (click)="addDepartment()">add department</ion-button>
+  <ion-button (click)="goToEmployeesPage()">Employees</ion-button>
 </ion-content>

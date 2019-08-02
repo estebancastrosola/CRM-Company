@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
+import { Router } from '@angular/router';
+
 
 //Providers
 import { EmployeeManagerProvider } from "./../../providers/managers/employee-manager";
@@ -16,7 +18,10 @@ export class ListEmployeePage implements OnInit {
   employees$: Observable<Employee[]>;
   public employees: Employee[];
 
-  constructor(private employee_manager: EmployeeManagerProvider) {}
+  constructor(
+    private employee_manager: EmployeeManagerProvider,
+    private router: Router,
+    ) {}
 
   ngOnInit() {
     this.employees$ = this.employee_manager.getEmployees$();
@@ -33,5 +38,13 @@ export class ListEmployeePage implements OnInit {
         email: "esteban@gmail.com"
       })
     );
+  }
+
+  goToDepartmentsPage(){
+    this.router.navigate(['/list-department'])
+  }
+  
+  ngOnDestroy(){
+    console.log("me destruyo")
   }
 }

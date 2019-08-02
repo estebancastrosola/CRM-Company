@@ -15,7 +15,10 @@ export class EmployeeManagerProvider {
     this.employees = [];
   }
 
-  async loadEmployees() {
+  async loadEmployees() 
+  {
+    this.employees = [];
+    this.employees$.next(this.employees);
     const loading = await this.loading_controller.create({
       message: "Loading"
     });
@@ -29,6 +32,11 @@ export class EmployeeManagerProvider {
     });
 
     await loading.dismiss();
+  }
+
+  loadEmployeesByDepartment(employees){
+    this.employees = employees;
+    this.employees$.next(this.employees);
   }
 
   getEmployees$(): Observable<Employee[]> {

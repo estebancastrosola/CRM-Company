@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
+import { Router } from '@angular/router';
 
 //Providers
 import { DepartmentManagerProvider } from "./../../providers/managers/department-manager";
+import { EmployeeManagerProvider } from "./../../providers/managers/employee-manager";
 
 //Models
 import { Department } from "../../models/index.models";
@@ -16,7 +18,11 @@ export class ListDepartmentPage implements OnInit {
   departments$: Observable<Department[]>;
   public departments: Department[];
 
-  constructor(private department_manager: DepartmentManagerProvider) {}
+  constructor(
+    private department_manager: DepartmentManagerProvider,
+    private employee_manager: EmployeeManagerProvider,
+    private router: Router,
+    ) {}
 
   ngOnInit() {
     this.departments$ = this.department_manager.getDepartments$();
@@ -24,6 +30,15 @@ export class ListDepartmentPage implements OnInit {
       departments => (this.departments = departments)
     );
     this.department_manager.loadDepartments();
+  }
+
+  loadEmployeesByDepartment(departmentIndex){
+    this.employee_manager.loadEmployeesByDepartment(this.departments[departmentIndex].employees);
+    this.goToEmployeesPage();
+  }
+
+  goToEmployeesPage(){
+    this.router.navigate(['/list-employee'])
   }
 
   addDepartment() {
@@ -34,5 +49,9 @@ export class ListDepartmentPage implements OnInit {
         phone: "697878787"
       })
     );
+  }
+
+  ngOnDestroy(){
+    console.log("me destruyo")
   }
 }
