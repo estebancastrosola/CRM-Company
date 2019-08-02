@@ -5,15 +5,23 @@
 </ion-header>
 
 <ion-content>
-    <ion-card
-        tappable
-        *ngFor="let employee of employees"
-      >
+  <!-- Skeleton screen -->
+  <div *ngIf="!employees">
+    <div class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+    </div>
+  </div>
+    <!-- Data to display after skeleton screen -->
+  <div *ngIf="employees">
+    <ion-card tappable *ngFor="let employee of employees">
       <div class="card-content">
-          <div class="card-title">{{ employee.name }}</div>
+        <div class="card-title">{{ employee.name }}</div>
       </div>
     </ion-card>
-    
-    <ion-button  (click)="addEmployee()">add employee</ion-button>
+  </div>
 
+  <ion-button (click)="addEmployee()">add employee</ion-button>
 </ion-content>

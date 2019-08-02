@@ -5,15 +5,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-card
-      tappable
-      *ngFor="let departament of departments"
-    >
-    <div class="card-content">
-        <div class="card-title">{{ departament.description }}</div>
+  <!-- Skeleton screen -->
+  <div *ngIf="!departments">
+    <div class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
     </div>
-  </ion-card>
-
-  <ion-button  (click)="addDepartment()">add department</ion-button>
-
+  </div>
+  <!-- Data to display after skeleton screen -->
+  <div *ngIf="departments">
+    <ion-card tappable *ngFor="let departament of departments">
+      <div class="card-content">
+        <div class="card-title">{{ departament.description }}</div>
+      </div>
+    </ion-card>
+  </div>
+  <ion-button (click)="addDepartment()">add department</ion-button>
 </ion-content>
