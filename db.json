@@ -1,22 +1,114 @@
 {
-    "employees": [
-      { "id": 1, "name": "Jhon", "surname": "Doe", "email": "doe@gmail.com" },
-      { "id": 2, "name": "Mike", "surname": "Conley", "email": "conlye@gmail.com" },
-      { "id": 3, "name": "James", "surname": "Rodriguez", "email": "rodriguez@gmail.com" },
-      { "id": 4, "name": "Jeniffer", "surname": "Millsen", "email": "millsen@gmail.com" }
-    ],
-    "departments": [
-      { "id": 1, "description": "Maths", "phone": "+34698989898", "employees": [
-        { "id": 1, "name": "Jhon", "surname": "Doe", "email": "doe@gmail.com" },
-        { "id": 4, "name": "Jeniffer", "surname": "Millsen", "email": "millsen@gmail.com" }
-      ] },
-      { "id": 2, "description": "Engineering", "phone": "+3469845898", "employees": [
-        { "id": 1, "name": "Jhon", "surname": "Doe", "email": "doe@gmail.com" },
-        { "id": 2, "name": "Mike", "surname": "Conley", "email": "conlye@gmail.com" }
-      ] },
-      { "id": 3, "description": "Chemistry", "phone": "+3469247898", "employees": [
-        { "id": 3, "name": "James", "surname": "Rodriguez", "email": "rodriguez@gmail.com" },
-        { "id": 4, "name": "Jeniffer", "surname": "Millsen", "email": "millsen@gmail.com" }
-      ] }
-    ]
-  }
+  "employees": [
+    {
+      "id": 1,
+      "name": "Jhon",
+      "surname": "Doe",
+      "email": "doe@gmail.com",
+      "incorporationDate": "2014-05-25"
+    },
+    {
+      "id": 2,
+      "name": "Mike",
+      "surname": "Conley",
+      "email": "conlye@gmail.com",
+      "incorporationDate": "2011-04-01"
+    },
+    {
+      "id": 3,
+      "name": "James",
+      "surname": "Rodriguez",
+      "email": "rodriguez@gmail.com",
+      "incorporationDate": "2018-12-20"
+    },
+    {
+      "id": 4,
+      "name": "Jeniffer",
+      "surname": "Millsen",
+      "email": "millsen@gmail.com",
+      "incorporationDate": "2017-10-07"
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "description": "Maths",
+      "phone": "+34698989898",
+      "employees": [
+        {
+          "id": 1,
+          "name": "Jhon",
+          "surname": "Doe",
+          "email": "doe@gmail.com",
+          "incorporationDate": "2014-05-25"
+        },
+        {
+          "id": 4,
+          "name": "Jeniffer",
+          "surname": "Millsen",
+          "email": "millsen@gmail.com",
+          "incorporationDate": "2017-10-07"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Engineering",
+      "phone": "+3469845898",
+      "employees": [
+        {
+          "id": 1,
+          "name": "Jhon",
+          "surname": "Doe",
+          "email": "doe@gmail.com",
+          "incorporationDate": "2014-05-25"
+        },
+        {
+          "id": 2,
+          "name": "Mike",
+          "surname": "Conley",
+          "email": "conlye@gmail.com",
+          "incorporationDate": "2011-04-01"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Chemistry",
+      "phone": "+3469247898",
+      "employees": [
+        {
+          "id": 3,
+          "name": "James",
+          "surname": "Rodriguez",
+          "email": "rodriguez@gmail.com",
+          "incorporationDate": "2018-12-20"
+        },
+        {
+          "id": 4,
+          "name": "Jeniffer",
+          "surname": "Millsen",
+          "email": "millsen@gmail.com",
+          "incorporationDate": "2017-10-07"
+        }
+      ]
+    }
+  ],
+  "search": [
+    {
+      "id": 4,
+      "name": "Jeniffer",
+      "surname": "Millsen",
+      "email": "millsen@gmail.com",
+      "incorporationDate": "2017-10-07"
+    },
+    {
+      "id": 3,
+      "name": "James",
+      "surname": "Rodriguez",
+      "email": "rodriguez@gmail.com",
+      "incorporationDate": "2018-12-20"
+    }
+
+  ]
+}

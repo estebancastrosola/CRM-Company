@@ -24,6 +24,9 @@ export class ListEmployeePage implements OnInit {
   loadingEmployees$: Observable<boolean>;
   public loadingEmployees: boolean;
 
+  resultsBySeach$: Observable<boolean>;
+  public resultsBySeach: boolean;
+
   constructor(
     private employee_manager: EmployeeManagerProvider,
     private router: Router,
@@ -42,6 +45,11 @@ export class ListEmployeePage implements OnInit {
     this.loadingEmployees$ = this.employee_manager.getLoadingEmployees$();
     this.loadingEmployees$.subscribe(
       loadingEmployees => (this.loadingEmployees = loadingEmployees)
+    );
+
+    this.resultsBySeach$ = this.employee_manager.getResultsBySearch$();
+    this.resultsBySeach$.subscribe(
+      resultsBySeach => (this.resultsBySeach = resultsBySeach)
     );
 
     this.employee_manager.loadEmployees();

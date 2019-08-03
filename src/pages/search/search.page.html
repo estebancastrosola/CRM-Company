@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search employees</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <form *ngIf="searchForm" [formGroup]="searchForm" (ngSubmit)="submit()">
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Incorporation date:</ion-label>
+            <ion-datetime formControlName="date" displayFormat="DD/MM/YYYY"></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="searchForm.get('date').errors && searchForm.get('date').dirty">
+            <p color="danger" ion-text *ngIf="searchForm.get('date').hasError('required')"><ion-text color="danger">This field is required</ion-text></p>
+          </ion-item>
+        </ion-list>
+        <div padding>
+          <ion-button  expand="full" type="submit" [disabled]="!searchForm.valid">Search</ion-button >
+        </div>
+      </form>
+
+</ion-content>

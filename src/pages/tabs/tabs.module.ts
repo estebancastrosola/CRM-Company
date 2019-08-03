@@ -21,6 +21,11 @@ const routes: Routes = [
         path: "tabDepartments",
         loadChildren:
           "../list-department/list-department.module#ListDepartmentPageModule"
+      },
+      {
+        path: "tabSearch",
+        loadChildren:
+          "../search/search.module#SearchPageModule"
       }
     ]
   },

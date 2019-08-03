@@ -1,7 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="!currentDepartment">All employees</ion-title>
+    <ion-title *ngIf="!currentDepartment && !resultsBySeach">All employees</ion-title>
     <ion-title *ngIf="currentDepartment">Employees of {{ currentDepartment }}</ion-title>
+    <ion-title *ngIf="resultsBySeach">Results of search</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -40,9 +41,9 @@
     </ion-list>
   </div>
 
-  <ion-button  expand="full"  *ngIf="!currentDepartment"  (click)="addEmployee()">add employee</ion-button>
+  <ion-button  expand="full"  *ngIf="!currentDepartment && !resultsBySeach"  (click)="addEmployee()">add employee</ion-button>
 
-  <ion-button  expand="full"  *ngIf="currentDepartment" (click)="loadAllEmployees()"
+  <ion-button  expand="full"  *ngIf="currentDepartment || resultsBySeach" (click)="loadAllEmployees()"
     >Load all Employees</ion-button
   >
 </ion-content>

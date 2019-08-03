@@ -18,6 +18,9 @@ export class EmployeeManagerProvider {
   public employees: Employee[];
   private employees$ = new Subject<Employee[]>();
 
+  public resultsBySeach: boolean;
+  public resultsBySeach$ = new Subject<boolean>();
+
   public employeeToEdit;
 
   constructor(
@@ -28,11 +31,16 @@ export class EmployeeManagerProvider {
     this.currentDepartment = "";
     this.loadingEmployees = false;
     this.employeeToEdit = null;
+    this.resultsBySeach = false;
   }
 
   async loadEmployees() {
     this.cleanEmloyees();
     this.cleanCurrentDepartment();
+
+    this.resultsBySeach = false;
+    this.resultsBySeach$.next(this.resultsBySeach);
+
     this.loadingEmployees = true;
     this.loadingEmployees$.next(this.loadingEmployees);
     this.employees$.next(this.employees);
@@ -53,11 +61,27 @@ export class EmployeeManagerProvider {
     this.loadingEmployees$.next(this.loadingEmployees);
   }
 
-  loadEmployeesByDepartment(employees, department) {
+  async loadEmployeesByDepartment(employees, department) {
+    const loading = await this.loading_controller.create({
+      message: "Searching..."
+    });
+    await loading.present();
+
+    this.loadingEmployees = true;
+    this.loadingEmployees$.next(this.loadingEmployees);
+
+    this.resultsBySeach = false;
+    this.resultsBySeach$.next(this.resultsBySeach);
+
     this.employees = employees;
     this.employees$.next(this.employees);
     this.currentDepartment = department;
     this.currentDepartment$.next(this.currentDepartment);
+    
+    await loading.dismiss();
+
+    this.loadingEmployees = false;
+    this.loadingEmployees$.next(this.loadingEmployees);
   }
 
   async deleteEmployee(index) {
@@ -94,6 +118,10 @@ export class EmployeeManagerProvider {
 
   getLoadingEmployees$(): Observable<boolean> {
     return this.loadingEmployees$.asObservable();
+  }
+
+  getResultsBySearch$(): Observable<boolean> {
+    return this.resultsBySeach$.asObservable();
   }
 
   cleanCurrentDepartment() {
@@ -162,5 +190,32 @@ export class EmployeeManagerProvider {
       color: "success"
     });
     toast.present();
+  }
+
+  async searchEmployeesByIncorporationDate(incorporationDate){
+    this.cleanEmloyees();
+    this.cleanCurrentDepartment();
+    this.loadingEmployees = true;
+    this.loadingEmployees$.next(this.loadingEmployees);
+
+    this.resultsBySeach = true;
+    this.resultsBySeach$.next(this.resultsBySeach);
+
+    const loading = await this.loading_controller.create({
+      message: "Searching..."
+    });
+    await loading.present();
+
+    let response = await fetch("http://localhost:3000/search");
+    let json = await response.json();
+    json.map(data => {
+      this.employees.push(data);
+      this.employees$.next(this.employees);
+    });
+
+    await loading.dismiss();
+
+    this.loadingEmployees = false;
+    this.loadingEmployees$.next(this.loadingEmployees);
   }
 }
