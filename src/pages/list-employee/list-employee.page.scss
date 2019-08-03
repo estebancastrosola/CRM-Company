@@ -1,4 +1,9 @@
-.iconDeleteItem{
-    color:red;
-    font-size: 25px
+.icon{
+    font-size: 25px;
+    &.iconDeleteItem{
+        color:red;
+    };
+    &.iconEditItem{
+        color:orange;
+    }
 }

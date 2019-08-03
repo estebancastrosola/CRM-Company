@@ -40,8 +40,10 @@ export class ListEmployeePage implements OnInit {
     );
 
     this.loadingEmployees$ = this.employee_manager.getLoadingEmployees$();
-    this.loadingEmployees$.subscribe(loadingEmployees => (this.loadingEmployees = loadingEmployees));
-    
+    this.loadingEmployees$.subscribe(
+      loadingEmployees => (this.loadingEmployees = loadingEmployees)
+    );
+
     this.employee_manager.loadEmployees();
   }
 
@@ -72,13 +74,16 @@ export class ListEmployeePage implements OnInit {
   }
 
   addEmployee() {
-    this.employee_manager.addEmployee(
-      new Employee({
-        id: "1",
-        name: "Esteban",
-        surname: "Castro",
-        email: "esteban@gmail.com"
-      })
-    );
+    this.employee_manager.cleanEmployeeToEdit();
+    this.goToUserForm();
+  }
+
+  editEmployee(index) {
+    this.employee_manager.setEmployeeToEdit(index);
+    this.goToUserForm();
+  }
+
+  goToUserForm() {
+    this.router.navigate(["/new-employee"]);
   }
 }

@@ -33,13 +33,14 @@
           {{ employee.name }}
         </ion-item>
         <ion-item-options side="end">
-          <button ion-button (click)="deleteEmployee(i)"> <ion-icon class="iconDeleteItem" name="trash"></ion-icon></button>
+            <button ion-button (click)="editEmployee(i)"> <ion-icon class="icon iconEditItem" name="create"></ion-icon></button>
+          <button ion-button (click)="deleteEmployee(i)"> <ion-icon class="icon iconDeleteItem" name="trash"></ion-icon></button>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
   </div>
 
-  <ion-button (click)="addEmployee()">add employee</ion-button>
+  <ion-button *ngIf="!currentDepartment"  (click)="addEmployee()">add employee</ion-button>
 
   <ion-button *ngIf="currentDepartment" (click)="loadAllEmployees()"
     >Load all Employees</ion-button

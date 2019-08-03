@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>new-employee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form *ngIf="employeeForm" [formGroup]="employeeForm" (ngSubmit)="submit()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Name:</ion-label>
+        <ion-input formControlName="name" type="text" ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="employeeForm.get('name').errors && employeeForm.get('name').dirty">
+        <p color="danger" ion-text *ngIf="employeeForm.get('name').hasError('required')">This field is required</p>
+      </ion-item>
+      <ion-item>        
+        <ion-label floating>Surname:</ion-label>
+        <ion-input formControlName="surname" type="text" ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="employeeForm.get('surname').errors && employeeForm.get('surname').dirty">
+        <p color="danger" ion-text *ngIf="employeeForm.get('surname').hasError('required')">This field is required</p>
+      </ion-item>
+      <ion-item>        
+        <ion-label floating>Email:</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="employeeForm.get('email').errors && employeeForm.get('email').dirty">
+        <p color="danger" ion-text *ngIf="employeeForm.get('email').hasError('required')">This field is required</p>
+        <p color="danger" ion-text *ngIf="employeeForm.get('email').hasError('pattern')">you must enter a valid email</p>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!employeeForm.valid">Save</button>
+    </div>
+  </form>
+
+  
+</ion-content>
