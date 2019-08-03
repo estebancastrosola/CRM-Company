@@ -28,12 +28,11 @@ export class EmployeeFormPage implements OnInit {
 
   ngOnInit() {
     var objectEmployeeToEdit = this.employee_manager.getEmployeeToEdit();
-    if(objectEmployeeToEdit){
+    if (objectEmployeeToEdit) {
       this.employeeToEdit = objectEmployeeToEdit.employee;
       this.indexEmployeeToEdit = objectEmployeeToEdit.index;
     }
     this.employeeForm = this.createMyForm();
-    
   }
 
   private createMyForm() {
@@ -59,20 +58,20 @@ export class EmployeeFormPage implements OnInit {
   }
 
   private submit() {
-    if(this.employeeToEdit){
+    if (this.employeeToEdit) {
       this.employee_manager.updateEmployee(this.indexEmployeeToEdit, {
         name: this.employeeForm.value.name,
         surname: this.employeeForm.value.surname,
         email: this.employeeForm.value.email
-      })
-    }else{
+      });
+    } else {
       this.employee_manager.addEmployee({
         name: this.employeeForm.value.name,
         surname: this.employeeForm.value.surname,
         email: this.employeeForm.value.email
       });
     }
-    
+
     this.goToEmployeesPage();
   }
 

@@ -21,7 +21,7 @@ export class DepartmentManagerProvider {
   async loadDepartments() {
     this.loadingDepartments = true;
     this.loadingDepartments$.next(this.loadingDepartments);
-    
+
     const loading = await this.loading_controller.create({
       message: "Loading"
     });

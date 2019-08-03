@@ -147,7 +147,6 @@ export class EmployeeManagerProvider {
     });
     await loading.present();
 
-
     let currentEmployeeToEdit = this.employees[index];
     currentEmployeeToEdit.name = employee.name;
     currentEmployeeToEdit.surname = employee.surname;
