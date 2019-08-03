@@ -11,11 +11,17 @@ export class DepartmentManagerProvider {
   public departments: Department[];
   private departments$ = new Subject<Department[]>();
 
+  public loadingDepartments: boolean;
+  public loadingDepartments$ = new Subject<boolean>();
+
   constructor(private loading_controller: LoadingController) {
     this.departments = [];
   }
 
   async loadDepartments() {
+    this.loadingDepartments = true;
+    this.loadingDepartments$.next(this.loadingDepartments);
+    
     const loading = await this.loading_controller.create({
       message: "Loading"
     });
@@ -29,6 +35,9 @@ export class DepartmentManagerProvider {
     });
 
     await loading.dismiss();
+
+    this.loadingDepartments = false;
+    this.loadingDepartments$.next(this.loadingDepartments);
   }
 
   getDepartments$(): Observable<Department[]> {
@@ -45,5 +54,9 @@ export class DepartmentManagerProvider {
     this.departments$.next(this.departments);
 
     await loading.dismiss();
+  }
+
+  getLoadingDepartments$(): Observable<boolean> {
+    return this.loadingDepartments$.asObservable();
   }
 }

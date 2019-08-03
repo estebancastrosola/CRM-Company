@@ -6,21 +6,36 @@
 
 <ion-content>
   <!-- Skeleton screen -->
-  <div *ngIf="!departments">
+  <div *ngIf="loadingDepartments">
     <div class="ion-padding custom-skeleton">
-      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-list>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-item>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-item>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-item>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-item>
+      </ion-list>
     </div>
   </div>
   <!-- Data to display after skeleton screen -->
-  <div *ngIf="departments">
-    <ion-card tappable *ngFor="let departament of departments; let i = index">
-      <div class="card-content" (click)="loadEmployeesByDepartment(i)">
-        <div class="card-title">{{ departament.description }}</div>
-      </div>
-    </ion-card>
+  <div *ngIf="!loadingDepartments">
+    <ion-list>
+      <ion-item-sliding #item *ngFor="let department of departments; let i = index">
+        <ion-item>
+          {{ department.description }}
+        </ion-item>
+        <ion-item-options side="end">
+          <button ion-button (click)="deleteEmployee(i)"> <ion-icon class="iconDeleteItem" name="trash"></ion-icon></button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
   </div>
   <ion-button (click)="addDepartment()">add department</ion-button>
 </ion-content>

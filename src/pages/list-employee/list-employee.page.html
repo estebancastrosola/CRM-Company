@@ -6,25 +6,42 @@
 
 <ion-content>
   <!-- Skeleton screen -->
-  <div *ngIf="!employees">
+  <div *ngIf="loadingEmployees">
     <div class="ion-padding custom-skeleton">
-      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-list>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-item>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-item>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-item>
+        <ion-item>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-item>
+      </ion-list>
     </div>
   </div>
-    <!-- Data to display after skeleton screen -->
-  <div *ngIf="employees">
-    <div *ngIf="currentDepartment">Employees of {{currentDepartment}}</div>
-    <ion-card tappable *ngFor="let employee of employees">
-      <div class="card-content">
-        <div class="card-title">{{ employee.name }}</div>
-      </div>
-    </ion-card>
+  <!-- Data to display after skeleton screen -->
+  <div *ngIf="!loadingEmployees">
+    <div *ngIf="currentDepartment">Employees of {{ currentDepartment }}</div>
+    <ion-list>
+      <ion-item-sliding #item *ngFor="let employee of employees; let i = index">
+        <ion-item>
+          {{ employee.name }}
+        </ion-item>
+        <ion-item-options side="end">
+          <button ion-button (click)="deleteEmployee(i)"> <ion-icon class="iconDeleteItem" name="trash"></ion-icon></button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
   </div>
 
   <ion-button (click)="addEmployee()">add employee</ion-button>
 
-  <ion-button  *ngIf="currentDepartment" (click)="loadAllEmployees()">Load all Employees</ion-button>
+  <ion-button *ngIf="currentDepartment" (click)="loadAllEmployees()"
+    >Load all Employees</ion-button
+  >
 </ion-content>
