@@ -1,11 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { Employee } from "../../models/index.models";
-
 //Providers
 import { EmployeeManagerProvider } from "../../providers/managers/employee-manager";
+import { Employee } from "../../models/index.models";
+
 
 @Component({
   selector: "app-employee-form",
@@ -13,65 +11,26 @@ import { EmployeeManagerProvider } from "../../providers/managers/employee-manag
   styleUrls: ["./employee-form.page.scss"]
 })
 export class EmployeeFormPage implements OnInit {
-  private employeeForm: FormGroup;
-
-  public employeeToEdit: Employee;
-  public indexEmployeeToEdit;
+  
+  public objectEmployeeToEdit;
 
   constructor(
-    private formBuilder: FormBuilder,
     private employee_manager: EmployeeManagerProvider,
-    private router: Router
+    private router: Router,
   ) {
-    this.employeeToEdit = null;
+
   }
 
   ngOnInit() {
-    var objectEmployeeToEdit = this.employee_manager.getEmployeeToEdit();
-    if (objectEmployeeToEdit) {
-      this.employeeToEdit = objectEmployeeToEdit.employee;
-      this.indexEmployeeToEdit = objectEmployeeToEdit.index;
-    }
-    this.employeeForm = this.createMyForm();
+    this.objectEmployeeToEdit = this.employee_manager.getEmployeeToEdit();
   }
 
-  private createMyForm() {
-    let _employeeForm: any = {};
-
-    _employeeForm = {
-      name: [
-        this.employeeToEdit ? this.employeeToEdit.name : "",
-        Validators.required
-      ],
-      surname: [this.employeeToEdit ? this.employeeToEdit.surname : "", []],
-      email: [
-        this.employeeToEdit ? this.employeeToEdit.email : "",
-        [
-          Validators.required,
-          Validators.pattern(
-            /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i
-          )
-        ]
-      ]
-    };
-    return this.formBuilder.group(_employeeForm);
+  private saveNewEmployee(data) {
+    this.employee_manager.addEmployee(data);
+    this.goToEmployeesPage();
   }
-
-  private submit() {
-    if (this.employeeToEdit) {
-      this.employee_manager.updateEmployee(this.indexEmployeeToEdit, {
-        name: this.employeeForm.value.name,
-        surname: this.employeeForm.value.surname,
-        email: this.employeeForm.value.email
-      });
-    } else {
-      this.employee_manager.addEmployee({
-        name: this.employeeForm.value.name,
-        surname: this.employeeForm.value.surname,
-        email: this.employeeForm.value.email
-      });
-    }
-
+  private updateEmployee(data) {
+    this.employee_manager.updateEmployee(data.indexEmployeeToEdit, data.objectEmployee);
     this.goToEmployeesPage();
   }
 

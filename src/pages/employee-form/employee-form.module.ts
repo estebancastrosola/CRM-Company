@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { EmployeeFormPage } from './employee-form.page';
 
+import {EmployeeDataFormComponent} from '../../components/employee-data-form/employee-data-form.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +24,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [EmployeeFormPage]
+  entryComponents: [EmployeeDataFormComponent],
+  declarations: [EmployeeFormPage, EmployeeDataFormComponent]
 })
 export class EmployeeFormPageModule {}
