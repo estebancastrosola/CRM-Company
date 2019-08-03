@@ -40,9 +40,9 @@
     </ion-list>
   </div>
 
-  <ion-button *ngIf="!currentDepartment"  (click)="addEmployee()">add employee</ion-button>
+  <ion-button  expand="full"  *ngIf="!currentDepartment"  (click)="addEmployee()">add employee</ion-button>
 
-  <ion-button *ngIf="currentDepartment" (click)="loadAllEmployees()"
+  <ion-button  expand="full"  *ngIf="currentDepartment" (click)="loadAllEmployees()"
     >Load all Employees</ion-button
   >
 </ion-content>
