@@ -16,6 +16,7 @@
   </div>
     <!-- Data to display after skeleton screen -->
   <div *ngIf="employees">
+    <div *ngIf="currentDepartment">Employees of {{currentDepartment}}</div>
     <ion-card tappable *ngFor="let employee of employees">
       <div class="card-content">
         <div class="card-title">{{ employee.name }}</div>
@@ -24,5 +25,6 @@
   </div>
 
   <ion-button (click)="addEmployee()">add employee</ion-button>
-  <ion-button (click)="goToDepartmentsPage()">Departments</ion-button>
+
+  <ion-button  *ngIf="currentDepartment" (click)="loadAllEmployees()">Load all Employees</ion-button>
 </ion-content>

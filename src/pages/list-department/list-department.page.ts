@@ -33,12 +33,12 @@ export class ListDepartmentPage implements OnInit {
   }
 
   loadEmployeesByDepartment(departmentIndex){
-    this.employee_manager.loadEmployeesByDepartment(this.departments[departmentIndex].employees);
+    this.employee_manager.loadEmployeesByDepartment(this.departments[departmentIndex].employees, this.departments[departmentIndex].description);
     this.goToEmployeesPage();
   }
 
   goToEmployeesPage(){
-    this.router.navigate(['/list-employee'])
+    this.router.navigate(['/tabs/tabEmployees'])
   }
 
   addDepartment() {
@@ -49,9 +49,5 @@ export class ListDepartmentPage implements OnInit {
         phone: "697878787"
       })
     );
-  }
-
-  ngOnDestroy(){
-    console.log("me destruyo")
   }
 }

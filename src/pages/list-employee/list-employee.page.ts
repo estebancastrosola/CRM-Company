@@ -18,6 +18,9 @@ export class ListEmployeePage implements OnInit {
   employees$: Observable<Employee[]>;
   public employees: Employee[];
 
+  currentDepartment$: Observable<string>;
+  public currentDepartment:string;
+
   constructor(
     private employee_manager: EmployeeManagerProvider,
     private router: Router,
@@ -26,6 +29,14 @@ export class ListEmployeePage implements OnInit {
   ngOnInit() {
     this.employees$ = this.employee_manager.getEmployees$();
     this.employees$.subscribe(employees => (this.employees = employees));
+
+    this.currentDepartment$ = this.employee_manager.getCurrentDepartment$();
+    this.currentDepartment$.subscribe(currentDepartment => (this.currentDepartment = currentDepartment));
+
+    this.employee_manager.loadEmployees();
+  }
+
+  loadAllEmployees(){
     this.employee_manager.loadEmployees();
   }
 
@@ -41,10 +52,6 @@ export class ListEmployeePage implements OnInit {
   }
 
   goToDepartmentsPage(){
-    this.router.navigate(['/list-department'])
-  }
-  
-  ngOnDestroy(){
-    console.log("me destruyo")
+    this.router.navigate(['/tabs/tabDepartments'])
   }
 }
