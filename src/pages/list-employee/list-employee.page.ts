@@ -84,6 +84,6 @@ export class ListEmployeePage implements OnInit {
   }
 
   goToUserForm() {
-    this.router.navigate(["/new-employee"]);
+    this.router.navigate(["/employee-form"]);
   }
 }

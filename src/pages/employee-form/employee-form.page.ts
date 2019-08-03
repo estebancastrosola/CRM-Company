@@ -8,11 +8,11 @@ import { Employee } from "../../models/index.models";
 import { EmployeeManagerProvider } from "../../providers/managers/employee-manager";
 
 @Component({
-  selector: "app-new-employee",
-  templateUrl: "./new-employee.page.html",
-  styleUrls: ["./new-employee.page.scss"]
+  selector: "app-employee-form",
+  templateUrl: "./employee-form.page.html",
+  styleUrls: ["./employee-form.page.scss"]
 })
-export class NewEmployeePage implements OnInit {
+export class EmployeeFormPage implements OnInit {
   private employeeForm: FormGroup;
 
   public employeeToEdit: Employee;

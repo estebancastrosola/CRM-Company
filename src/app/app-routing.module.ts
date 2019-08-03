@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: '../pages/tabs/tabs.module#TabsPageModule' },
-  { path: 'new-employee', loadChildren: '../pages/new-employee/new-employee.module#NewEmployeePageModule' },
+  { path: 'employee-form', loadChildren: '../pages/employee-form/employee-form.module#EmployeeFormPageModule' },
   //{ path: 'list-department', loadChildren: '../pages/list-department/list-department.module#ListDepartmentPageModule' },
   //{ path: 'list-employee', loadChildren: '../pages/list-employee/list-employee.module#ListEmployeePageModule' },
 ];
