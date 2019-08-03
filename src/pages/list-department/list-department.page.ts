@@ -37,7 +37,9 @@ export class ListDepartmentPage implements OnInit {
     );
 
     this.loadingDepartments$ = this.department_manager.getLoadingDepartments$();
-    this.loadingDepartments$.subscribe(loadingDepartments => (this.loadingDepartments = loadingDepartments));
+    this.loadingDepartments$.subscribe(
+      loadingDepartments => (this.loadingDepartments = loadingDepartments)
+    );
 
     this.department_manager.loadDepartments();
   }
@@ -57,9 +59,9 @@ export class ListDepartmentPage implements OnInit {
   addDepartment() {
     this.department_manager.addDepartment(
       new Department({
-        id: "1",
-        description: "Departamento 1",
-        phone: "697878787"
+        id: this.departments.length + 1,
+        description: "Department " + (this.departments.length + 1),
+        phone: "9XXXXXXXX"
       })
     );
   }

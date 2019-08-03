@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>list-employee</ion-title>
+    <ion-title *ngIf="!currentDepartment">All employees</ion-title>
+    <ion-title *ngIf="currentDepartment">Employees of {{ currentDepartment }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,7 +27,6 @@
   </div>
   <!-- Data to display after skeleton screen -->
   <div *ngIf="!loadingEmployees">
-    <div *ngIf="currentDepartment">Employees of {{ currentDepartment }}</div>
     <ion-list>
       <ion-item-sliding #item *ngFor="let employee of employees; let i = index">
         <ion-item>
