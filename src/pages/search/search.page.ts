@@ -16,7 +16,7 @@ export class SearchPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private employee_manager: EmployeeManagerProvider,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -32,11 +32,12 @@ export class SearchPage implements OnInit {
     return this.formBuilder.group(searchForm);
   }
 
-  submit(){
-    this.employee_manager.searchEmployeesByIncorporationDate(this.searchForm.value.date),
-    this.goToEmployeesPage();
+  submit() {
+    this.employee_manager.searchEmployeesByIncorporationDate(
+      this.searchForm.value.date
+    ),
+      this.goToEmployeesPage();
   }
-
 
   goToEmployeesPage() {
     this.router.navigate(["/tabs/tabEmployees"]);

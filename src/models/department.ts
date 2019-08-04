@@ -13,7 +13,7 @@ export class Department {
 
     if (object.employees) {
       for (let currentEmployee of object.employees) {
-       this.employees.push(new Employee(currentEmployee));
+        this.employees.push(new Employee(currentEmployee));
       }
     }
   }

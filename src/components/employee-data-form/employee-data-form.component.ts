@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Employee } from "../../models/index.models";
 
@@ -6,12 +6,11 @@ import { Employee } from "../../models/index.models";
 import { EmployeeManagerProvider } from "../../providers/managers/employee-manager";
 
 @Component({
-  selector: 'app-employee-data-form',
-  templateUrl: './employee-data-form.component.html',
-  styleUrls: ['./employee-data-form.component.scss'],
+  selector: "app-employee-data-form",
+  templateUrl: "./employee-data-form.component.html",
+  styleUrls: ["./employee-data-form.component.scss"]
 })
 export class EmployeeDataFormComponent implements OnInit {
-
   @Input() private objectEmployeeToEdit;
   @Output() private onSaveNewEmployee = new EventEmitter();
   @Output() private onUpdateEmployee = new EventEmitter();
@@ -23,11 +22,10 @@ export class EmployeeDataFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private employee_manager: EmployeeManagerProvider,
-  ) { }
+    private employee_manager: EmployeeManagerProvider
+  ) {}
 
   ngOnInit() {
-
     if (this.objectEmployeeToEdit) {
       this.employeeToEdit = this.objectEmployeeToEdit.employee;
       this.indexEmployeeToEdit = this.objectEmployeeToEdit.index;
@@ -63,21 +61,18 @@ export class EmployeeDataFormComponent implements OnInit {
         name: this.employeeForm.value.name,
         surname: this.employeeForm.value.surname,
         email: this.employeeForm.value.email
-      }
+      };
       this.onUpdateEmployee.emit({
-        indexEmployeeToEdit:this.indexEmployeeToEdit,
-        objectEmployee : objectEmployee
+        indexEmployeeToEdit: this.indexEmployeeToEdit,
+        objectEmployee: objectEmployee
       });
     } else {
       let objectEmployee = {
         name: this.employeeForm.value.name,
         surname: this.employeeForm.value.surname,
         email: this.employeeForm.value.email
-      }
+      };
       this.onSaveNewEmployee.emit(objectEmployee);
     }
-
-
   }
-
 }

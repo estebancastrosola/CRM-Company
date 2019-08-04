@@ -4,22 +4,18 @@ import { Router } from "@angular/router";
 import { EmployeeManagerProvider } from "../../providers/managers/employee-manager";
 import { Employee } from "../../models/index.models";
 
-
 @Component({
   selector: "app-employee-form",
   templateUrl: "./employee-form.page.html",
   styleUrls: ["./employee-form.page.scss"]
 })
 export class EmployeeFormPage implements OnInit {
-  
   public objectEmployeeToEdit;
 
   constructor(
     private employee_manager: EmployeeManagerProvider,
-    private router: Router,
-  ) {
-
-  }
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.objectEmployeeToEdit = this.employee_manager.getEmployeeToEdit();
@@ -30,7 +26,10 @@ export class EmployeeFormPage implements OnInit {
     this.goToEmployeesPage();
   }
   private updateEmployee(data) {
-    this.employee_manager.updateEmployee(data.indexEmployeeToEdit, data.objectEmployee);
+    this.employee_manager.updateEmployee(
+      data.indexEmployeeToEdit,
+      data.objectEmployee
+    );
     this.goToEmployeesPage();
   }
 

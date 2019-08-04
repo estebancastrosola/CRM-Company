@@ -19,9 +19,7 @@ export class DepartmentManagerProvider {
   }
 
   async loadDepartments() {
-    this.loadingDepartments = true;
-    this.loadingDepartments$.next(this.loadingDepartments);
-
+    this.setLoadingDepartments(true);
     const loading = await this.loading_controller.create({
       message: "Loading"
     });
@@ -35,9 +33,7 @@ export class DepartmentManagerProvider {
     });
 
     await loading.dismiss();
-
-    this.loadingDepartments = false;
-    this.loadingDepartments$.next(this.loadingDepartments);
+    this.setLoadingDepartments(false);
   }
 
   getDepartments$(): Observable<Department[]> {
@@ -54,6 +50,11 @@ export class DepartmentManagerProvider {
     this.departments$.next(this.departments);
 
     await loading.dismiss();
+  }
+
+  setLoadingDepartments(loadingDepartments) {
+    this.loadingDepartments = loadingDepartments;
+    this.loadingDepartments$.next(this.loadingDepartments);
   }
 
   getLoadingDepartments$(): Observable<boolean> {

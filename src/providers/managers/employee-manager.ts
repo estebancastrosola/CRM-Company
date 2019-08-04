@@ -36,14 +36,10 @@ export class EmployeeManagerProvider {
 
   async loadEmployees() {
     this.cleanEmloyees();
-    this.cleanCurrentDepartment();
+    this.setCurrentDepartment("");
+    this.setResultsBySearch(false);
+    this.setLoadingEmployees(true);
 
-    this.resultsBySeach = false;
-    this.resultsBySeach$.next(this.resultsBySeach);
-
-    this.loadingEmployees = true;
-    this.loadingEmployees$.next(this.loadingEmployees);
-    this.employees$.next(this.employees);
     const loading = await this.loading_controller.create({
       message: "Loading"
     });
@@ -57,8 +53,7 @@ export class EmployeeManagerProvider {
     });
 
     await loading.dismiss();
-    this.loadingEmployees = false;
-    this.loadingEmployees$.next(this.loadingEmployees);
+    this.setLoadingEmployees(false);
   }
 
   async loadEmployeesByDepartment(employees, department) {
@@ -67,21 +62,16 @@ export class EmployeeManagerProvider {
     });
     await loading.present();
 
-    this.loadingEmployees = true;
-    this.loadingEmployees$.next(this.loadingEmployees);
-
-    this.resultsBySeach = false;
-    this.resultsBySeach$.next(this.resultsBySeach);
+    this.setLoadingEmployees(true);
+    this.setResultsBySearch(false);
 
     this.employees = employees;
     this.employees$.next(this.employees);
-    this.currentDepartment = department;
-    this.currentDepartment$.next(this.currentDepartment);
-    
+    this.setCurrentDepartment(department);
+
     await loading.dismiss();
 
-    this.loadingEmployees = false;
-    this.loadingEmployees$.next(this.loadingEmployees);
+    this.setLoadingEmployees(false);
   }
 
   async deleteEmployee(index) {
@@ -101,32 +91,6 @@ export class EmployeeManagerProvider {
       color: "success"
     });
     toast.present();
-  }
-
-  getEmployees$(): Observable<Employee[]> {
-    return this.employees$.asObservable();
-  }
-
-  cleanEmloyees() {
-    this.employees = [];
-    this.employees$.next(this.employees);
-  }
-
-  getCurrentDepartment$(): Observable<string> {
-    return this.currentDepartment$.asObservable();
-  }
-
-  getLoadingEmployees$(): Observable<boolean> {
-    return this.loadingEmployees$.asObservable();
-  }
-
-  getResultsBySearch$(): Observable<boolean> {
-    return this.resultsBySeach$.asObservable();
-  }
-
-  cleanCurrentDepartment() {
-    this.currentDepartment = "";
-    this.currentDepartment$.next(this.currentDepartment);
   }
 
   public async addEmployee(employeeObject) {
@@ -154,21 +118,6 @@ export class EmployeeManagerProvider {
     toast.present();
   }
 
-  setEmployeeToEdit(index) {
-    this.employeeToEdit = {
-      employee: this.employees[index],
-      index: index
-    };
-  }
-
-  getEmployeeToEdit() {
-    return this.employeeToEdit;
-  }
-
-  cleanEmployeeToEdit() {
-    this.employeeToEdit = null;
-  }
-
   async updateEmployee(index, employee) {
     const loading = await this.loading_controller.create({
       message: "Saving..."
@@ -192,14 +141,12 @@ export class EmployeeManagerProvider {
     toast.present();
   }
 
-  async searchEmployeesByIncorporationDate(incorporationDate){
+  async searchEmployeesByIncorporationDate(incorporationDate) {
     this.cleanEmloyees();
-    this.cleanCurrentDepartment();
-    this.loadingEmployees = true;
-    this.loadingEmployees$.next(this.loadingEmployees);
+    this.setCurrentDepartment("");
+    this.setLoadingEmployees(true);
 
-    this.resultsBySeach = true;
-    this.resultsBySeach$.next(this.resultsBySeach);
+    this.setResultsBySearch(true);
 
     const loading = await this.loading_controller.create({
       message: "Searching..."
@@ -215,7 +162,57 @@ export class EmployeeManagerProvider {
 
     await loading.dismiss();
 
-    this.loadingEmployees = false;
+    this.setLoadingEmployees(false);
+  }
+
+  getEmployees$(): Observable<Employee[]> {
+    return this.employees$.asObservable();
+  }
+
+  cleanEmloyees() {
+    this.employees = [];
+    this.employees$.next(this.employees);
+  }
+
+  setCurrentDepartment(currentDepartment) {
+    this.currentDepartment = currentDepartment;
+    this.currentDepartment$.next(this.currentDepartment);
+  }
+
+  getCurrentDepartment$(): Observable<string> {
+    return this.currentDepartment$.asObservable();
+  }
+
+  getLoadingEmployees$(): Observable<boolean> {
+    return this.loadingEmployees$.asObservable();
+  }
+
+  setLoadingEmployees(loadingEmployees) {
+    this.loadingEmployees = loadingEmployees;
     this.loadingEmployees$.next(this.loadingEmployees);
+  }
+
+  setResultsBySearch(resultBySearch) {
+    this.resultsBySeach = resultBySearch;
+    this.resultsBySeach$.next(this.resultsBySeach);
+  }
+
+  getResultsBySearch$(): Observable<boolean> {
+    return this.resultsBySeach$.asObservable();
+  }
+
+  setEmployeeToEdit(index) {
+    this.employeeToEdit = {
+      employee: this.employees[index],
+      index: index
+    };
+  }
+
+  getEmployeeToEdit() {
+    return this.employeeToEdit;
+  }
+
+  cleanEmployeeToEdit() {
+    this.employeeToEdit = null;
   }
 }

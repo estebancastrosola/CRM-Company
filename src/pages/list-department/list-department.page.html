@@ -29,7 +29,7 @@
     <ion-list>
       <ion-item-sliding #item *ngFor="let department of departments; let i = index">
         <ion-item>
-          {{ department.description }}
+          {{ department.description }} - {{ department.phone }}
         </ion-item>
         <ion-item-options side="end">
           <button ion-button (click)="loadEmployeesByDepartment(i)"> <ion-icon class="iconSeeEmployees" name="contacts"></ion-icon></button>

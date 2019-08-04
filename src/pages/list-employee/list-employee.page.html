@@ -31,7 +31,7 @@
     <ion-list>
       <ion-item-sliding #item *ngFor="let employee of employees; let i = index">
         <ion-item>
-          {{ employee.name }}
+          {{ employee.name }} - {{employee.email}}
         </ion-item>
         <ion-item-options side="end">
             <button ion-button (click)="editEmployee(i)"> <ion-icon class="icon iconEditItem" name="create"></ion-icon></button>
